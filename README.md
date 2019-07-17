@@ -24,10 +24,14 @@ class TestRPCAuth(unittest.TestCase):
     self.rpcauth = importlib.import_module('rpcauth')
     
     def test_generate_salt(self):
-      for i in range():
-        self.assertEqual()
+      for i in range(16, 32 + 1):
+        self.assertEqual(len(self.rpcauth.generate_salt(i)), i * 2)
         
     def test_generate_password(self):
+      password = self.rpcauth.generate_password()
+      expected_password = base64.urlsafe_b64encode(
+        base64.urlsafe_b64decode(password)).decode('utf-8')
+      safe.assertEqual(expected_password, password)
     
     def test_check_password_hmac(self):
     
